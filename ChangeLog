@@ -1,6 +1,10 @@
 Revision history for XDI::SPIT.
 
+1.1 -- July 2, 2004
+	- Exception handling on calls to XRI.
+	- Fixed bug in the directory structure.
+
 1.0 -- June 4, 2004
 	- First released release.
 
-$Id: ChangeLog,v 1.2 2004/06/04 08:18:49 eekim Exp $
+$Id: ChangeLog,v 1.3 2004/07/03 01:31:07 eekim Exp $

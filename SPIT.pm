@@ -1,6 +1,6 @@
 # XDI::SPIT.pm
 #
-# $Id: SPIT.pm,v 1.3 2004/06/04 08:18:20 eekim Exp $
+# $Id: SPIT.pm,v 1.2 2004/07/03 01:31:07 eekim Exp $
 #
 # Copyright (c) Blue Oxen Associates 2004.  All rights reserved.
 #
@@ -15,7 +15,7 @@ use URI::Escape;
 use XRI;
 use XRI::Descriptor;
 
-our $VERSION = '1.0';
+our $VERSION = '1.1';
 
 ### constructor
 
@@ -30,16 +30,19 @@ sub resolveBroker {
     my $ename = shift;
 
     my $xri = XRI->new($ename);
-    my $xml = $xri->resolveToAuthorityXML;
-    if ($xml) {
+    my $xml;
+    eval {
+        $xml = $xri->resolveToAuthorityXML;
+    };
+    if ($@ || !$xml) {
+        return 0;
+    }
+    else {
         my $xriDescriptor = XRI::Descriptor->new($xml);
         my @localAccess = $xriDescriptor->getLocalAccess;
         my $idBroker = ${$localAccess[0]->uris}[0];
         my $enumber = $xriDescriptor->getMappings->[0];
         return $idBroker, $enumber;
-    }
-    else {
-        return 0;
     }
 }
 

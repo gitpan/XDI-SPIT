@@ -5,5 +5,5 @@ README
 cgi/idbroker.pl
 cgi/login.pl
 cgi/registry.pl
-XDI/SPIT.pm
+SPIT.pm
 t/spit.t
